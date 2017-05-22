@@ -10,7 +10,8 @@ class App extends Component {
         firstName:'',
         lastName:'',
         email:'',
-        password:''
+        password:'',
+        age: undefined
       }
     }
   }
@@ -37,12 +38,44 @@ class App extends Component {
       <div>
         <Header />
         <div className='container'>
+
+
+
           <div className='row'>
             <div className='col-xs-6 col-xs-offset-3'>
               <div className='panel panel-default'>
                 <div className='panel-body'>
                   <h3>Registration</h3>
                   <form onSubmit={this.handleSubmit.bind(this)}>
+
+                    <div className='row'>
+                      <div className='col-xs-6'>
+                        <div className='panel panel-default'>
+                          <div className='panel-body'>
+                            <FormInput
+                               name='firstName'
+                               label='First Name'
+                               value={this.state.registration.firstName}
+                               onChange={this.handleChange.bind(this)}
+                             />
+                          </div>
+                        </div>
+                      </div>
+                      <div className='col-xs-6'>
+                        <div className='panel panel-default'>
+                          <div className='panel-body'>
+                            <FormInput
+                               name='firstName'
+                               label='First Name'
+                               value={this.state.registration.firstName}
+                               onChange={this.handleChange.bind(this)}
+                             />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                     <div className='row'>
                       <div className='col-xs-12'>
 
@@ -91,6 +124,18 @@ class App extends Component {
 
                     <div className='row'>
                       <div className='col-xs-12'>
+                        <FormInput
+                           name='age'
+                           label='Age'
+                           value={this.state.registration.age}
+                           onChange={this.handleChange.bind(this)}
+                           type='number'
+                         />
+                      </div>
+                    </div>
+
+                    <div className='row'>
+                      <div className='col-xs-12'>
                         <input className='btn btn-primary' type='submit' value='Submit' />
                       </div>
                     </div>
@@ -108,6 +153,7 @@ class App extends Component {
               <li className='list-group-item'>Last Name: {this.state.registration.lastName}</li>
               <li className='list-group-item'>Email: {this.state.registration.email}</li>
               <li className='list-group-item'>Password: {this.state.registration.password}</li>
+              <li className='list-group-item'>Age: {this.state.registration.age}</li>
             </ul>
           </div>
         </div>
