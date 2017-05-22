@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Header from './components/Header'
+import Header from './components/Header';
+import FormInput from './components/FormInput';
 
 class App extends Component {
   constructor(props){
@@ -28,6 +29,9 @@ class App extends Component {
     console.log(this.state.registration)
   }
 
+  //                           errors={this.state.errors.firstName}
+
+
   render() {
     return (
       <div>
@@ -41,78 +45,47 @@ class App extends Component {
                   <form onSubmit={this.handleSubmit.bind(this)}>
                     <div className='row'>
                       <div className='col-xs-12'>
-                        <div className='form-group'> 
-                          <label 
-                            htmlFor='firstName'
-                            className='control-label'
-                          >
-                            First Name
-                          </label>
-                          <input
-                            name='firstName'
-                            value={this.state.registration.firstName}
-                            onChange={this.handleChange.bind(this)}
-                            className='form-control'
-                          />
-                        </div>
+
+                        <FormInput
+                           name='firstName'
+                           label='First Name'
+                           value={this.state.registration.firstName}
+                           onChange={this.handleChange.bind(this)}
+                         />
                       </div>
                     </div>
 
                     <div className='row'>
                       <div className='col-xs-12'>
-                        <div className='form-group'>
-                          <label 
-                            htmlFor='lastName'
-                            className='control-label'
-                          >
-                            Last Name
-                          </label>
-                          <input
-                            name='lastName'
-                            value={this.state.registration.lastName}
-                            onChange={this.handleChange.bind(this)}
-                            className='form-control'
-                          />
-                        </div>
+                        <FormInput
+                           name='lastName'
+                           label='Last Name'
+                           value={this.state.registration.lastName}
+                           onChange={this.handleChange.bind(this)}
+                         />
                       </div>
                     </div>
 
                     <div className='row'>
                       <div className='col-xs-12'>
-                        <div className='form-group'>
-                          <label 
-                            htmlFor='email'
-                            className='control-label'
-                          >
-                            Email
-                          </label>
-                          <input
-                            name='email'
-                            value={this.state.registration.email}
-                            onChange={this.handleChange.bind(this)}
-                            className='form-control'
-                          />
-                        </div>
+                        <FormInput
+                           name='email'
+                           label='Email'
+                           value={this.state.registration.email}
+                           onChange={this.handleChange.bind(this)}
+                         />
                       </div>
                     </div>
 
                     <div className='row'>
                       <div className='col-xs-12'>
-                        <div className='form-group'>
-                          <label 
-                            htmlFor='password'
-                            className='control-label'
-                          >
-                            Password
-                          </label>
-                          <input
-                            type='password'
-                            name='password'
-                            value={this.state.registration.password}
-                            onChange={this.handleChange.bind(this)}
-                            className='form-control'
-                          />
-                        </div>
+                        <FormInput
+                           name='password'
+                           label='Password'
+                           value={this.state.registration.password}
+                           type="password"
+                           onChange={this.handleChange.bind(this)}
+                         />
                       </div>
                     </div>
 
