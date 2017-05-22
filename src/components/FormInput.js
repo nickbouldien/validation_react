@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-class FormInput extends Component {
+export default class FormInput extends Component {
   constructor(props){
     super(props)
       this.state = {
@@ -37,4 +37,4 @@ class FormInput extends Component {
   }
 
 
-export default FormInput;
+// export default FormInput;
