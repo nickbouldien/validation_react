@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import {formInputChnage} from '../actions/Actions'
+import {formInputChange} from '../actions/Actions'
+
+
+/// where to use action formInputChange function???
+
 
 export default class FormInput extends Component {
   constructor(props){
@@ -8,6 +12,8 @@ export default class FormInput extends Component {
         type: this.props.type || "text"
       }
     }
+
+    // actions function
 
     render(){
 
@@ -36,4 +42,4 @@ export default class FormInput extends Component {
   }
 
 
-// export default FormInput;
+// export default FormInput;  //exporting above

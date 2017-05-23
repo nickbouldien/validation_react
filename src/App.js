@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import FormInput from './components/FormInput';
 import registrationStore from './stores/RegistrationStore';
+import {formInputChange} from './actions/Actions'
 
 class App extends Component {
   constructor(props){
@@ -15,7 +16,7 @@ class App extends Component {
   handleUpdate(){
     this.setState({
       registration: registrationStore.getFields()
-    })
+    })  // .bind(this) ???
   }
 
   componentWillMount(){
@@ -23,26 +24,28 @@ class App extends Component {
   }
 
   handleChange(event){
-    const target = event.target
-    const registration = this.state.registration
-    registration[target.name] = target.value
-    this.setState({
-      registration: registration
-    })
+    console.log(this);
+    debugger;
+    const target = event.target;
+    //const registration = this.state.registration
+    console.log(target);
+    formInputChange(target.name, target.value)
+    // registration[target.name] = target.value
   }
 
   handleSubmit(event){
+    const target = event.target
+    // const registration = this.state.registration
     event.preventDefault()
-    this.validate()
+    this.validate(target.name, target.value)
     console.log(this.state.registration)
   }
 
-  //                           errors={this.state.errors.firstName}
-
-  validate(){
-    registrationStore.validate()
-    this.setState({errors: registrationStore.getErrors()})
-  }
+  // validate(fieldName, value){
+  //   // registrationStore.validate()
+  //   formSubmit(fieldName, value)
+  //   //this.setState({errors: registrationStore.getErrors()})
+  // }
 
   isValid(){
     return Object.keys(this.state.errors).length === 0

@@ -1,9 +1,18 @@
 import dispatcher from '../dispatchers/Dispatcher';
 
-export function formInputChnage(index, value){
+export function formInputChange(fieldName, value){
+  //debugger;
   dispatcher.dispatch({
     type: 'FIELD_SET',
-    index: index,
+    fieldName: fieldName,
     value: value
   })
 }
+//
+// export function formSubmit(fieldName, value){
+//   dispatcher.dispatch({
+//     type: 'FORM_SUBMIT',
+//     fieldName: fieldName,
+//     value: value
+//   })
+// }
