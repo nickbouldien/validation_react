@@ -12,6 +12,15 @@ class App extends Component {
       }
     }
 
+  handleUpdate(){
+    this.setState({
+      registration: registrationStore.getFields()
+    })
+  }
+
+  componentWillMount(){
+    registrationStore.on('change', this.handleUpdate.bind(this));
+  }
 
   handleChange(event){
     const target = event.target

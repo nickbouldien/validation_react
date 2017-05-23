@@ -1,5 +1,9 @@
-class RegistrationStore{
-  constructor(){
+import EventEmitter from 'events';
+import dispatcher from '../dispatchers/Dispatcher';
+
+class RegistrationStore extends EventEmitter{
+  constructor(props){
+    super(props)
     this.fields = {
       firstName:'',
       lastName:'',
@@ -57,8 +61,24 @@ class RegistrationStore{
       this.errors[fieldName] = message
     }
 
+    setField(fieldName, value){
+      this.fields[fieldName] = value;
+      this.emit('change');
+    }
+
+    handleAction(action){
+      switch(action.type){
+        case('FIELD_SET'):{
+          this.setField(action.index,action.value)
+          break
+        }
+        default: {}
+      }
+    }
+
 }
 
 
 const registrationStore = new RegistrationStore()
+dispatcher.register(registrationStore.handleAction.bind(this))
 export default registrationStore

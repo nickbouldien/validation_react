@@ -1,6 +1,5 @@
-
-
 import React, { Component } from 'react';
+import {formInputChnage} from '../actions/Actions'
 
 export default class FormInput extends Component {
   constructor(props){
