@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import FormInput from './components/FormInput';
 import registrationStore from './stores/RegistrationStore';
+import {formInputChange, formSubmit} from './actions/Actions'
 
 class App extends Component {
   constructor(props){
@@ -12,27 +13,45 @@ class App extends Component {
       }
     }
 
-
-  handleChange(event){
-    const target = event.target
-    const registration = this.state.registration
-    registration[target.name] = target.value
+  handleUpdate(){
     this.setState({
-      registration: registration
+      registration: registrationStore.getFields()
     })
   }
 
-  handleSubmit(event){
-    event.preventDefault()
-    this.validate()
-    console.log(this.state.registration)
+  handleFormSubmit(){
+    this.setState({
+      errors: registrationStore.getErrors()
+    })
   }
 
-  //                           errors={this.state.errors.firstName}
+  componentWillMount(){
+    registrationStore.on('change', this.handleUpdate.bind(this));
+    registrationStore.on('FORM_SUBMIT', this.handleFormSubmit.bind(this));
+  }
 
-  validate(){
-    registrationStore.validate()
-    this.setState({errors: registrationStore.getErrors()})
+  handleChange(event){
+    //console.log(this);
+    //debugger;
+    const target = event.target;
+    //const registration = this.state.registration
+    console.log(target);
+    formInputChange(target.name, target.value)
+    // registration[target.name] = target.value
+  }
+
+  handleSubmit(event){
+    const target = event.target
+    // const registration = this.state.registration
+    event.preventDefault()
+    this.validate(target.name, target.value)
+    //console.log(this.state.registration)
+  }
+
+  validate(fieldName, value){
+    // registrationStore.validate()
+    formSubmit(fieldName, value)
+    //this.setState({errors: registrationStore.getErrors()})
   }
 
   isValid(){
@@ -81,7 +100,7 @@ class App extends Component {
                                label='Last Name'
                                value={this.state.registration.lastName}
                                onChange={this.handleChange.bind(this)}
-                                 errors={this.state.errors.firstName}
+                                 errors={this.state.errors.lastName}
                              />
                           </div>
                         </div>
@@ -97,7 +116,7 @@ class App extends Component {
                            label='Street Address'
                            value={this.state.registration.address}
                            onChange={this.handleChange.bind(this)}
-                             errors={this.state.errors.firstName}
+                             errors={this.state.errors.address}
                          />
                       </div>
                     </div>
@@ -111,7 +130,7 @@ class App extends Component {
                                label='City'
                                value={this.state.registration.city}
                                onChange={this.handleChange.bind(this)}
-                                 errors={this.state.errors.firstName}
+                                 errors={this.state.errors.city}
                              />
                           </div>
                         </div>
@@ -124,7 +143,7 @@ class App extends Component {
                                label='State'
                                value={this.state.registration.state}
                                onChange={this.handleChange.bind(this)}
-                                 errors={this.state.errors.firstName}
+                                 errors={this.state.errors.state}
                              />
                           </div>
                         </div>
@@ -138,7 +157,7 @@ class App extends Component {
                                type='number'
                                value={this.state.registration.zipCode}
                                onChange={this.handleChange.bind(this)}
-                                 errors={this.state.errors.firstName}
+                                 errors={this.state.errors.zipCode}
                              />
                           </div>
                         </div>
@@ -152,7 +171,7 @@ class App extends Component {
                            label='Email'
                            value={this.state.registration.email}
                            onChange={this.handleChange.bind(this)}
-                             errors={this.state.errors.firstName}
+                             errors={this.state.errors.email}
                          />
                       </div>
                     </div>
@@ -165,7 +184,7 @@ class App extends Component {
                            value={this.state.registration.password}
                            type="password"
                            onChange={this.handleChange.bind(this)}
-                             errors={this.state.errors.firstName}
+                             errors={this.state.errors.password}
                          />
                       </div>
                     </div>
@@ -178,7 +197,7 @@ class App extends Component {
                            value={this.state.registration.age}
                            onChange={this.handleChange.bind(this)}
                            type='number'
-                             errors={this.state.errors.firstName}
+                             errors={this.state.errors.age}
                          />
                       </div>
                     </div>
