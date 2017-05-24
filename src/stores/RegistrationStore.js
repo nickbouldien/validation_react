@@ -49,7 +49,7 @@ class RegistrationStore extends EventEmitter{
       this.validatePresence('zipCode')
       this.validatePresence('age')
       this.validateEmail('email')
-
+      this.emit('FORM_SUBMIT')
     }
 
     validatePresence(fieldName){
@@ -67,6 +67,8 @@ class RegistrationStore extends EventEmitter{
 
     addError(fieldName, message){
       this.errors[fieldName] = message
+      console.log(message);
+      this.emit('FORM_SUBMIT')
     }
 
     setField(fieldName, value){
@@ -77,6 +79,8 @@ class RegistrationStore extends EventEmitter{
 
     otherFunction(fieldName, value){
       console.log(fieldName, value);
+      this.validate()
+      // console.log('leaving');
     }
 
     handleAction(action){
@@ -87,10 +91,10 @@ class RegistrationStore extends EventEmitter{
           //debugger;
           break
         }
-        // case('FORM_SUBMIT'):{
-        //   this.otherFunction(action.fieldName,action.value)
-        //   break
-        // }
+        case('FORM_SUBMIT'):{
+          this.otherFunction(action.fieldName,action.value)
+          break
+        }
         default: {}
       }
     }
@@ -100,5 +104,5 @@ class RegistrationStore extends EventEmitter{
 const registrationStore = new RegistrationStore()
 //console.log(this);  //und
 dispatcher.register(registrationStore.handleAction.bind(registrationStore))
-//window.store = registrationStore
+window.store = registrationStore
 export default registrationStore

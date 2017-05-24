@@ -8,11 +8,11 @@ export function formInputChange(fieldName, value){
     value: value
   })
 }
-//
-// export function formSubmit(fieldName, value){
-//   dispatcher.dispatch({
-//     type: 'FORM_SUBMIT',
-//     fieldName: fieldName,
-//     value: value
-//   })
-// }
+
+export function formSubmit(fieldName, value){
+  dispatcher.dispatch({
+    type: 'FORM_SUBMIT',
+    fieldName: fieldName,
+    value: value
+  })
+}
